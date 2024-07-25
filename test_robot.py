@@ -60,3 +60,53 @@ def test_invalidDirectionPlaceAndReport(capfd):
     robot._Robot__report()
     out, _ = capfd.readouterr()
     assert out == ""
+    
+#Rotations Right and Left
+###############################################################################
+def test_clockwiseRotate(capfd):
+    """
+    Tests that an invalid direction doesn't work
+    """
+    robot = Robot()
+    robot._Robot__place(1,2,"NORTH")
+    robot._Robot__right()
+    robot._Robot__report()
+    out, _ = capfd.readouterr()
+    assert out == "1,2,EAST\n"
+    robot._Robot__right()
+    robot._Robot__report()
+    out, _ = capfd.readouterr()
+    assert out == "1,2,SOUTH\n"
+    robot._Robot__right()
+    robot._Robot__report()
+    out, _ = capfd.readouterr()
+    assert out == "1,2,WEST\n"
+    robot._Robot__right()
+    robot._Robot__report()
+    out, _ = capfd.readouterr()
+    assert out == "1,2,NORTH\n"
+    
+    
+def test_anticlockwiseRotate(capfd):
+    """
+    Tests that an invalid direction doesn't work
+    """
+    robot = Robot()
+    robot._Robot__place(1,2,"NORTH")
+    robot._Robot__left()
+    robot._Robot__report()
+    out, _ = capfd.readouterr()
+    assert out == "1,2,WEST\n"
+    robot._Robot__left()
+    robot._Robot__report()
+    out, _ = capfd.readouterr()
+    assert out == "1,2,SOUTH\n"
+    robot._Robot__left()
+    robot._Robot__report()
+    out, _ = capfd.readouterr()
+    assert out == "1,2,EAST\n"
+    robot._Robot__left()
+    robot._Robot__report()
+    out, _ = capfd.readouterr()
+    assert out == "1,2,NORTH\n"
+    

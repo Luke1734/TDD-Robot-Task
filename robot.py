@@ -12,19 +12,19 @@ class Robot():
     _matrixToDirectionMapping: dict = dict((v.tobytes(), k) for k, v in _directionToMatrixMapping.items())
 
     
-    def __place(self, x:int, y:int, direction:str):
+    def place(self, x:int, y:int, direction:str):
         if x<0 or x>4 or y<0 or y>4 or direction not in Robot._directionToMatrixMapping.keys():
             return
         self.__position = np.array([x,y]).T
         self.__direction = Robot._directionToMatrixMapping[direction]
         
-    def __right(self):
+    def right(self):
         self.__direction = Robot.__clockwiseRotation.dot(self.__direction)
         
-    def __left(self):
+    def left(self):
         self.__direction = Robot.__anticlockwiseRotation.dot(self.__direction)
         
-    def __report(self):
+    def report(self):
         if np.array_equal(self.__direction, np.array([0,0])):
             return
         direction = Robot._matrixToDirectionMapping[self.__direction.tobytes()]

@@ -144,27 +144,31 @@ def test_validMoveInAllDirections(capfd):
 
 def test_invalidMoveInAllDirections(capfd):
     """
-    Tests that moving in all directiosn works by going round in a circle
+    Tests that moving in all directions works by going round in a circle
     """
     robot = Robot()
     for i in range(0,5):
         robot.place(i,0,"SOUTH")
         robot.move()
+        robot.report()
         out, _ = capfd.readouterr()
         assert out == f"{i},0,SOUTH\n"
 
         robot.place(4,i,"EAST")
         robot.move()
+        robot.report()
         out, _ = capfd.readouterr()
         assert out == f"4,{i},EAST\n"
 
         robot.place(i,4,"NORTH")
         robot.move()
+        robot.report()
         out, _ = capfd.readouterr()
         assert out == f"{i},4,NORTH\n"
 
         robot.place(0,i,"WEST")
         robot.move()
+        robot.report()
         out, _ = capfd.readouterr()
         assert out == f"0,{i},WEST\n"
     
